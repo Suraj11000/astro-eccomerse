@@ -10,15 +10,23 @@ const products = {
 
 // Implement getStaticPaths
 export async function getStaticPaths() {
-  // Return the list of slugs as paths to generate static pages
-  return Object.keys(products).map((slug) => ({
+  // Generate paths for each product slug
+  const paths = Object.keys(products).map((slug) => ({
     params: { slug },
   }));
+
+  return { paths };
 }
 
-// Extract slug from Astro params
+// Extract the slug from Astro.params
 const { slug } = Astro.params;
 const product = products[slug];
+
+if (!product) {
+  throw new Error(`Product not found for slug: ${slug}`);
+}
+
+export const prerender = true;
 ---
 
 <Layout>
