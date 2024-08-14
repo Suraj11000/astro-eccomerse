@@ -1,22 +1,12 @@
 ---
-// Importing the layout component
 import Layout from "../../layouts/Layout.astro";
 
-// Define your products data
 const products = {
   "product-1": { name: "Product 1", description: "Description of Product 1" },
   "product-2": { name: "Product 2", description: "Description of Product 2" },
   "product-3": { name: "Product 3", description: "Description of Product 3" },
 };
 
-// Define the getStaticPaths function to generate paths
-export async function getStaticPaths() {
-  return Object.keys(products).map((slug) => ({
-    params: { slug },
-  }));
-}
-
-// Fetch the slug from Astro's params
 const { slug } = Astro.params;
 const product = products[slug];
 ---
